@@ -1,4 +1,4 @@
-Function convertFrom-epoch {
+Function ConvertFrom-Epoch {
 	<#
 	.Synopsis
 		Convert from epoch time to human
@@ -29,7 +29,7 @@ Function convertFrom-epoch {
 	}
 }
 
-Function convertTo-epoch {
+Function ConvertTo-Epoch {
     <#
 	.Synopsis
 		Convert time to epoch
