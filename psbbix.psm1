@@ -161,6 +161,8 @@ Function New-ZabbixSession {
 
     $BodyJSON = ConvertTo-Json $Body
 	write-verbose $BodyJSON
+	$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+	Write-Verbose "Convert BodyJSON to UTF-8"
 	if ($PSVersionTable.PSEdition -ne "core") {
 		if (!(test-connection $IPAddress -Quiet -Count 1)) {write-host "$IPAddress is not available.`n" -f red; return}
 	}
@@ -282,6 +284,8 @@ Function Remove-ZabbixSession {
 		
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result | out-null} else {$a.error}
@@ -329,6 +333,8 @@ Function Get-ZabbixVersion {
 		
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -506,6 +512,8 @@ Function Get-ZabbixHost {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -674,6 +682,8 @@ Function Set-ZabbixHost {
 
 		$BodyJSON = ConvertTo-Json $Body -Depth 3
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		if (!$removeTemplates) {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -817,6 +827,8 @@ Function New-ZabbixHost {
 
 		$BodyJSON = ConvertTo-Json $Body -Depth 3
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {
@@ -892,6 +904,8 @@ Function Remove-ZabbixHost {
 		
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		if ([bool]$WhatIfPreference.IsPresent) {}
 		if ($PSCmdlet.ShouldProcess($Name,"Delete")) {  
@@ -988,6 +1002,8 @@ Function Remove-ZabbixHost {
 
 		$BodyJSON = ConvertTo-Json $Body -Depth 3
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		#$a.result.hostids
@@ -1083,6 +1099,8 @@ Function Get-ZabbixTemplate {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 			if ($a.result) {$a.result} else {$a.error}
@@ -1190,6 +1208,8 @@ Function New-ZabbixTemplate {
 
 		$BodyJSON = ConvertTo-Json $Body -Depth 3
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		#$a.result | Select-Object Name,TemplateID,@{Name="HostsMembers";Expression={$_.hosts.hostid}}
@@ -1287,6 +1307,8 @@ Function Set-ZabbixTemplate {
 
 		$BodyJSON = ConvertTo-Json $Body -Depth 3
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -1338,6 +1360,8 @@ Function Remove-ZabbixTemplate {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		if ([bool]$WhatIfPreference.IsPresent) {}
 		if ($PSCmdlet.ShouldProcess($TemplateName,"Delete")) {  
@@ -1422,6 +1446,8 @@ Function Get-ZabbixHostGroup {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -1481,6 +1507,8 @@ Function Set-ZabbixHostGroup {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -1538,6 +1566,8 @@ Function New-ZabbixHostGroup {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -1592,6 +1622,8 @@ Function Remove-ZabbixHostGroup {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		if ([bool]$WhatIfPreference.IsPresent) {}
 		if ($PSCmdlet.ShouldProcess($Name,"Delete")) {  
@@ -1675,6 +1707,8 @@ Function Set-ZabbixHostGroupRemoveHosts {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			if ([bool]$WhatIfPreference.IsPresent) {}
@@ -1751,6 +1785,8 @@ Function Set-ZabbixHostGroupAddHosts {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -1848,6 +1884,8 @@ Function Get-ZabbixMaintenance {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -1911,6 +1949,8 @@ Function Remove-ZabbixMaintenance {
 		
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		
 		if ([bool]$WhatIfPreference.IsPresent) {}
@@ -2089,6 +2129,8 @@ Function New-ZabbixMaintenance {
 		
 		$BodyJSON = ConvertTo-Json $Body -Depth 4
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -2234,6 +2276,8 @@ Function New-ZabbixMaintenance {
 		
 		$BodyJSON = ConvertTo-Json $Body -Depth 4
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -2378,6 +2422,8 @@ Function New-ZabbixMaintenance {
 		
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -2483,6 +2529,8 @@ Function New-ZabbixHttpTest {
 		}
 		$BodyJSON = ConvertTo-Json $Body -Depth 3
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -2584,6 +2632,8 @@ Function Set-ZabbixHttpTest {
 
 		$BodyJSON = ConvertTo-Json $Body -Depth 3
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -2636,6 +2686,8 @@ Function Remove-ZabbixHttpTest {
 
 		$BodyJSON = ConvertTo-Json $Body -Depth 3
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		if ([bool]$WhatIfPreference.IsPresent) {}
 		if ($PSCmdlet.ShouldProcess($Name,"Delete")) {  
@@ -2736,6 +2788,8 @@ Function Export-ZabbixConfiguration {
 
 			$BodyJSON = ConvertTo-Json $Body -Depth 3
 			write-verbose $BodyJSON
+			$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+			Write-Verbose "Convert BodyJSON to UTF-8"
 			
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 			if ($a.result) {$a.result} else {$a.error}
@@ -2757,6 +2811,8 @@ Function Export-ZabbixConfiguration {
 
 			$BodyJSON = ConvertTo-Json $Body -Depth 3
 			write-verbose $BodyJSON
+			$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+			Write-Verbose "Convert BodyJSON to UTF-8"
 			
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 			if ($a.result) {$a.result} else {$a.error}
@@ -2778,6 +2834,8 @@ Function Export-ZabbixConfiguration {
 
 			$BodyJSON = ConvertTo-Json $Body -Depth 3
 			write-verbose $BodyJSON
+			$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+			Write-Verbose "Convert BodyJSON to UTF-8"
 			
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 			if ($a.result) {$a.result} else {$a.error}
@@ -2799,6 +2857,8 @@ Function Export-ZabbixConfiguration {
 
 			$BodyJSON = ConvertTo-Json $Body -Depth 3
 			write-verbose $BodyJSON
+			$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+			Write-Verbose "Convert BodyJSON to UTF-8"
 			
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 			if ($a.result) {$a.result} else {$a.error}
@@ -2820,6 +2880,8 @@ Function Export-ZabbixConfiguration {
 
 			$BodyJSON = ConvertTo-Json $Body -Depth 3
 			write-verbose $BodyJSON
+			$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+			Write-Verbose "Convert BodyJSON to UTF-8"
 			
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 			if ($a.result) {$a.result} else {$a.error}
@@ -2935,6 +2997,8 @@ function Import-ZabbixConfiguration {
 
 		$BodyJSON = ConvertTo-Json $Body -Depth 3
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {
@@ -3032,6 +3096,8 @@ Function Get-ZabbixTrigger {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -3101,6 +3167,8 @@ Function Set-ZabbixTrigger {
 		
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -3174,6 +3242,8 @@ Function New-ZabbixTrigger {
 		
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -3311,6 +3381,8 @@ Function Get-ZabbixItem {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -3398,6 +3470,8 @@ Function Set-ZabbixItem {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -3468,6 +3542,8 @@ Function Remove-ZabbixItem {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		if ([bool]$WhatIfPreference.IsPresent) {}
 		if ($PSCmdlet.ShouldProcess($Name,"Delete")){  
@@ -3561,6 +3637,8 @@ Function Get-ZabbixEvent {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -3619,6 +3697,8 @@ Function Set-ZabbixEvent {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -3710,6 +3790,8 @@ Function Get-ZabbixAlert {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -3769,6 +3851,8 @@ Function Get-ZabbixAction {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -3825,6 +3909,8 @@ Function Set-ZabbixAction {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -3896,6 +3982,8 @@ Function Get-ZabbixUser {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -3956,6 +4044,8 @@ Function Remove-ZabbixUser {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		if ([bool]$WhatIfPreference.IsPresent) {}
 		if ($PSCmdlet.ShouldProcess($Alias,"Delete")) {  
@@ -4171,6 +4261,8 @@ Function New-ZabbixUser {
 
 		$BodyJSON = ConvertTo-Json $Body -Depth 3
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -4368,6 +4460,8 @@ Function Set-ZabbixUser {
 		
 		$BodyJSON = ConvertTo-Json $Body -Depth 3
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -4433,6 +4527,8 @@ Function Get-ZabbixUserGroup {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -4531,6 +4627,8 @@ Function New-ZabbixUserGroup {
 
 		$BodyJSON = ConvertTo-Json $Body -Depth 3
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -4633,6 +4731,8 @@ Function Set-ZabbixUserGroup {
 
 		$BodyJSON = ConvertTo-Json $Body -Depth 3
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -4693,6 +4793,8 @@ Function Remove-ZabbixUserGroup {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		if ($UserGroupID.count -gt 0) {
 			if ([bool]$WhatIfPreference.IsPresent) {}
@@ -4778,6 +4880,8 @@ Function Get-ZabbixHistory {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -4871,6 +4975,8 @@ Function Get-ZabbixApplication {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -4930,6 +5036,8 @@ Function Set-ZabbixApplication {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -4979,6 +5087,8 @@ Function Remove-ZabbixApplication {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		if ([bool]$WhatIfPreference.IsPresent) {}
 		if ($PSCmdlet.ShouldProcess("$($Name+"@"+(Get-ZabbixApplication | ? name -eq "$Name" | ? hostid -eq $HostID).host.host)","Delete")) {  
@@ -5063,6 +5173,8 @@ Function New-ZabbixApplication {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -5128,6 +5240,8 @@ Function Get-ZabbixHostInterface {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -5224,6 +5338,8 @@ Function Set-ZabbixHostInterface {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -5332,6 +5448,8 @@ Function New-ZabbixHostInterface {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -5385,6 +5503,8 @@ Function Remove-ZabbixHostInterface {
 		
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		if ([bool]$WhatIfPreference.IsPresent) {}
 		if ($PSCmdlet.ShouldProcess($Port,"Delete")) {  
@@ -5468,6 +5588,8 @@ Function Get-ZabbixScreen {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -5525,6 +5647,8 @@ Function Get-ZabbixProblem {
 		
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -5613,6 +5737,8 @@ Function Get-ZabbixGraph {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -5755,6 +5881,8 @@ Function Get-ZabbixMediaType {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -5894,6 +6022,8 @@ Function New-ZabbixMediaType {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -6039,6 +6169,8 @@ Function Set-ZabbixMediaType {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
 		if ($a.result) {$a.result} else {$a.error}
@@ -6092,6 +6224,8 @@ Function Remove-ZabbixMediaType {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		if ([bool]$WhatIfPreference.IsPresent) {}
 		if ($PSCmdlet.ShouldProcess($mediatypeid,"Delete")) {  
@@ -6204,6 +6338,8 @@ Function Get-ZabbixHostInventory {
 
 		$BodyJSON = ConvertTo-Json $Body -Depth 4
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
@@ -6462,6 +6598,8 @@ Function Set-ZabbixHostInventory {
 
 		$BodyJSON = ConvertTo-Json $Body
 		write-verbose $BodyJSON
+		$BodyJSON = [System.Text.Encoding]::UTF8.GetBytes($BodyJSON)
+		Write-Verbose "Convert BodyJSON to UTF-8"
 		
 		try {
 			$a = Invoke-RestMethod "$URL/api_jsonrpc.php" -ContentType "application/json" -Body $BodyJSON -Method Post
